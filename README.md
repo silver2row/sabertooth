@@ -67,7 +67,9 @@ outputs. You, on this board, will get two DC motor outputs, four inputs, and a s
 
 # Now...
 
-    On your BBGW w/ Motor Bridge Cape attached, utilize the P9 header. Use your UART1 pins, P9_24 and P9_26 respectively, w/ leads attached to the S1 and S2 screw connectors on the Sabertooth.
+    On your BBGW w/ Motor Bridge Cape attached, utilize the P9 header. 
+    Use your UART1 pins, P9_24 and P9_26 respectively, w/ leads attached
+    to the S1 and S2 screw connectors on the Sabertooth.
     
 ...
 
