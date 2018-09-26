@@ -83,4 +83,4 @@ I will get on this project tonight and make some strides.
 
 Seth
 
-P.S. If I get in trouble over the lack of the MIT license listed in my README.md, please let me know. 
+P.S. If I get in trouble over the lack of the MIT license listed in my README.md, please let me know. Oh and UART will not work w/ the current configuartion of my set up. Please make a note.
