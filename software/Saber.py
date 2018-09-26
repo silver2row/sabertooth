@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from pysabertooth import Sabertooth
 import time
 
