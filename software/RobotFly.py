@@ -2,7 +2,7 @@
 
 from pysabertooth import Sabertooth
 from flask import Flask, render_template
-import serial
+
 import time
 
 # on the beaglebone related boards, use P9_21 for UART2 and set up config-pin.
