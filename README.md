@@ -38,7 +38,7 @@ I have changed the software to suit my needs and the set up I currently have on 
     from pysabertooth import Sabertooth
     import time
 
-    saber = Sabertooth("/dev/ttyO1", baudrate=9600, address=128, timeout=0.1)
+    saber = Sabertooth("/dev/ttyO2", baudrate=9600, address=128, timeout=0.1)
     
     saber.drive(1, 85)
     saber.drive(2, 85)
@@ -54,7 +54,7 @@ I have changed the software to suit my needs and the set up I currently have on 
 
 # This software!
 From above, the software uses the library pysabertooth. I then imported time to use time.sleep to keep my motors turning for a period of time. The fourth line, that was changed due to reasons on 
-the Linux board, the BBGW, is done to suit the UART capabilities of the board at /dev/ttyO1 for UART1. I slowed the baudrate down to set it as a packetized serial connection from the Sabertooth
+the Linux board, the BBGW, is done to suit the UART capabilities of the board at /dev/ttyO2 for UART2 but TXD only. I slowed the baudrate down to set it as a packetized serial connection from the Sabertooth
 2 x 12. The address, if you read over the packetized serial section of the Sabertooth 2 x 12 documentation, states that the address at 128 w/ switches one and two up can be used w/ that
 specific baudrate.
 
@@ -66,5 +66,51 @@ DimensionEngineering.com is where you can purchase one of these boards w/ the At
 # Now...
 
     On your BBGW w/ Motor Bridge Cape attached, utilize the P9 header. 
-    Use your UART1 pins, P9_24 and P9_26 respectively, w/ leads attached
-    to the S1 and S2 screw connectors on the Sabertooth.
+    Use your UART2 pins, P9_21 respectively, w/ leads attached
+    to the S1 screw connector on the Sabertooth.
+
+# Okay and Moving Forward!
+
+    Once things are connnected:
+
+    use this command: sudo config-pin P9.21 uart
+    This will ensure that your board is set up for uart mode.
+
+    Once you have tested your software w/ the hardware, we need to set up
+    a .sh file and then a .service file to make sure config-pin is 
+    working on boot. If wanted, you could start a service, a .service file, 
+    for the software your write too.
+
+    Here is it:
+
+    Go to /usr/bin and create a .sh file w/ your favorite editor. The file 
+    goes a little like this:
+
+    #!/bin/bash
+
+    sudo config-pin P9.21 uart
+
+...
+
+Close this file by first saving it. Use this command to turn your file into an executable: sudo chmod 755 yourfile.sh
+
+...
+
+Now...we need to make a .service file and save it to /etc/systemd/system, i.e. like so:
+
+    [Unit]
+    Description=Starting a Config-Pin Utility on Boot
+
+    [Service]
+    ExecStart=/usr/bin/yourfile.sh
+
+    [Install]
+    WantedBy=multi-user.target
+
+...
+
+This should set us up for stardom. I mean that this will inevitably start to make things easier to start once the system boots. Excuse my funny language.
+
+Seth
+
+P.S. If you need anything, please do not hesitate to ask away. I will "try" to answer as soon as possible. Give it three days for service.
