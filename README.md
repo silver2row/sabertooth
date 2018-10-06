@@ -92,6 +92,12 @@ DimensionEngineering.com is where you can purchase one of these boards w/ the At
 
 ...
 
+I just added some funny bunch of .html software to call it in the Flask application while making the motors still move. I found this .html software on
+w3schools.com. I have been searching for more info. on where I found this idea but it is not showing up again. The left side of the web page, the 
+navigation section, is useless right now. It does absolutely nothing.
+
+...
+
 Close this file by first saving it. Use this command to turn your file into an executable: sudo chmod 755 yourfile.sh
 
 ...
