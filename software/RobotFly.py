@@ -9,7 +9,7 @@ import time
 
 # attach P9_21 to S1 on the sabertooth 2 x 12 and attach GND on the sabertooth to GND on your BBB.
 
-saber = Sabertooth("/dev/ttyO2", baudrate=9600, address=128, timeout=0.1)
+saber = Sabertooth("/dev/ttyS2", baudrate=9600, address=128, timeout=0.1)
 
 # for instance, sudo config-pin P9.21 uart, that cmd will do it.
 
@@ -19,24 +19,23 @@ app = Flask(__name__)
 @app.route("/")
 @app.route("/<state>")
 
-def updates(state=None):
     if state == "F":
-        print "Robot Moving Forward"
+        print ("Robot Moving Forward")
         saber.drive(1, 100)
         saber.drive(2, 100)
         #time.sleep(.2)
     if state == "R":
-        print "Robot Turning Right"
+        print ("Robot Turning Right")
         saber.drive(1, 75)
         saber.drive(2, 25)
         #time.sleep(.2)
     if state == "L":
-        print "Robot Turning Left"
+        print ("Robot Turning Left")
         saber.drive(1, 25)
         saber.drive(2, 75)
         #time.sleep(.2)
     if state == "S":
-        print "Robot Stopped"
+        print ("Robot Stopped")
         saber.drive(1, 0)
         saber.drive(2, 0)
         saber.stop()
