@@ -3,7 +3,7 @@
 from pysabertooth import Sabertooth
 import time
 
-saber = Sabertooth("/dev/ttyO1", baudrate=9600, address=128, timeout=0.1)
+saber = Sabertooth("/dev/ttyS1", baudrate=9600, address=128, timeout=0.1)
 
 saber.drive(1, 85)
 saber.drive(2, 85)
