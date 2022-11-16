@@ -5,9 +5,9 @@ angry or upset b/c of the lack of license agreements being met.
 
 ...
 
-# So, we seem to keep meeting this way!
+# So...
 I am basically using the BBGW, a Motor Bridge Cape, and a Sabertooth 2 x 12 V 1.00 to make some motors move. You can find the BBGW by searching online for BeagleBone Green Wireless. Seeed Studio 
-produced it by their association w/ BeagleBoard.org. 
+produced it by their association w/ BeagleBoard.org. The Motor Bridge Cape has since been shelved by some for its unavailability w/ recent times.
 
 ...
 
@@ -36,18 +36,19 @@ So...
 I have changed the software to suit my needs and the set up I currently have on my BBGW to better acquiant myself w/ how this software runs.
 
     from pysabertooth import Sabertooth
-    import time
+    from time import sleep
 
-    saber = Sabertooth("/dev/ttyO2", baudrate=9600, address=128, timeout=0.1)
-    
+    saber = Sabertooth("/dev/ttyS2", baudrate=9600, address=128, timeout=0.1)
+    # /dev/ttyS2 is UART2 on the BBGW or other am335x related boards...
+
     saber.drive(1, 85)
     saber.drive(2, 85)
     saber.stop()
-    time.sleep(15)
+    sleep(15)
 
     saber.drive(1, -60)
     saber.drive(2, -60)
-    time.sleep(5)
+    sleep(5)
 
     saber.stop()
     saber.close()    
@@ -73,8 +74,8 @@ DimensionEngineering.com is where you can purchase one of these boards w/ the At
 
     Once things are connnected:
 
-    use this command: sudo config-pin P9.21 uart
-    This will ensure that your board is set up for uart mode.
+    use this command: config-pin P9.21 uart
+    This will ensure that your board is set up for uart mode to just transmit.
 
     Once you have tested your software w/ the hardware, we need to set up
     a .sh file and then a .service file to make sure config-pin is 
@@ -88,7 +89,7 @@ DimensionEngineering.com is where you can purchase one of these boards w/ the At
 
     #!/bin/bash
 
-    sudo config-pin P9.21 uart
+    config-pin P9.21 uart
 
 ...
 
@@ -115,7 +116,7 @@ Now...we need to make a .service file and save it to /etc/systemd/system, i.e. l
 
 ...
 
-This should set us up for stardom. I mean that this will inevitably start to make things easier to start once the system boots. Excuse my funny language.
+This will inevitably start to make things easier to start once the system boots.
 
 Seth
 
